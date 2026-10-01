@@ -32,6 +32,7 @@ def render(root):
         + "\n\n## 실행 환경별 보정\n\n해당 환경의 보정만 적용한다.\n\n"
         + corrections
         + "\n\n## 문체 예시\n\n문체가 모호할 때 [익명화한 편집 예시](references/examples.md)를 읽는다. 예시는 가상이며 사용자 경험으로 재사용하지 않는다.\n"
+        + "\n## 참고 지침\n\n독자·목적, 링크·예시 설명, 표현 점검의 적용 범위가 필요하면 [외부 지침 반영 기준](references/editorial-principles.md)을 읽는다. 외부 규칙보다 사용자의 요청과 사실 보존을 우선한다.\n"
     )
 
 

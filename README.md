@@ -15,6 +15,7 @@ Claude, ChatGPT(Codex 포함), Grok에서 쓸 수 있게 구성했습니다. 기
 | `platforms/codex.md` | Codex 스킬 설치 방법, `AGENTS.md`에 넣을 문구 |
 | `platforms/grok.md` | Grok 맞춤 지침·워크스페이스 적용 방법, 보정 문구 |
 | `skills/writing-style-doc/references/examples.md` | 규칙 설명용 가상 편집 예시. 실제 사용자 문체 자료는 아님 |
+| `skills/writing-style-doc/references/editorial-principles.md` | 공개 Git 자료의 출처·반영 원칙과 한국어 적용 범위 |
 | `evaluation/cases.md` | 경험·추정·익명화·적용 범위를 확인하는 수동 평가 입력 |
 | `scripts/sync_style.py` | 전체본·보정에서 스킬 생성, 동기화와 짧은 버전 길이 검사 |
 | `scripts/package_skill.py` | 동기화 확인 후 설치용 ZIP 생성 |
@@ -62,6 +63,8 @@ Claude, ChatGPT(Codex 포함), Grok에서 쓸 수 있게 구성했습니다. 기
 | Grok | 요청 없는 농담·개성 톤, X 게시물·실시간 검색 결과의 교차 확인 |
 
 ## 다른 스킬과의 관계
+
+Google 문서 가이드, Developer Style Guide, Vale write-good에서 독자·목적, 링크·예시 설명, 문서 갱신과 편집 검토 원칙을 참고했습니다. 출처와 적용하지 않은 영어 규칙은 [외부 지침 반영 기준](skills/writing-style-doc/references/editorial-principles.md)에 기록했습니다. 영어 검사기를 설치하거나 개인 문체를 외부 표준으로 대체하지 않았습니다.
 
 - 특정 매체의 게시 규격이 명시되면 그 규격이 우선하고, 이 스킬은 문장 톤 보정만 맡습니다.
 - 적용 범위가 겹치는 다른 문체 스킬과 함께 켜 두면 어느 쪽이 적용될지 일정하지 않습니다. 하나만 활성화하는 편이 낫습니다.
