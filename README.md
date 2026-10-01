@@ -1,13 +1,31 @@
 # writing-style-doc
 
-한국어 글쓰기·문서 작성 문체를 정리한 저장소입니다. 블로그, 기술 기고, 사용기, 설정 기록, 보고서·업무 문서를 쓰거나 다듬을 때 AI가 같은 기준으로 작업하도록 만든 지침입니다.
+한국어 글쓰기·문서 작성 문체를 정리한 저장소입니다. 블로그, 기술 기고, 사용기, 설정 기록, README·가이드, 보고서·업무 문서를 쓰거나 다듬을 때 AI가 같은 기준으로 작업하도록 만든 지침입니다.
 
-같은 내용을 두 가지 형태로 둡니다.
+Claude, ChatGPT(Codex 포함), Grok에서 쓸 수 있게 구성했습니다. 기준은 하나이고, 플랫폼마다 넣는 위치와 길이 제한이 달라서 형태만 나눴습니다.
+
+## 파일 구성
 
 | 파일 | 용도 |
 |---|---|
-| `skills/writing-style-doc/SKILL.md` | Claude 스킬 (Claude 앱·Claude Code에서 자동 적용) |
-| `prompts/writing-style-doc-prompt.md` | 다른 AI(ChatGPT, Gemini 등)에 붙여 넣는 공유용 프롬프트 |
+| `STYLE.md` | 전체본. 어느 AI에나 붙여 넣는 기준 문서 (약 4,100자) |
+| `skills/writing-style-doc/SKILL.md` | 스킬 파일. Claude와 Codex가 같은 파일을 읽음 |
+| `platforms/claude.md` | Claude 앱·Claude Code 설치 방법, Claude 보정 문구 |
+| `platforms/chatgpt.md` | ChatGPT 맞춤형 지침용 짧은 버전(약 700자), 보정 문구 |
+| `platforms/codex.md` | Codex 스킬 설치 방법, `AGENTS.md`에 넣을 문구 |
+| `platforms/grok.md` | Grok 맞춤 지침·워크스페이스 적용 방법, 보정 문구 |
+
+## 빠른 시작
+
+| 쓰는 도구 | 할 일 |
+|---|---|
+| Claude 앱 | `skills/writing-style-doc` 폴더를 zip으로 묶어 스킬로 업로드 |
+| Claude Code | `skills/writing-style-doc`를 `~/.claude/skills/`에 복사 |
+| ChatGPT | 맞춤형 지침에 짧은 버전, 또는 프로젝트 지침에 `STYLE.md` + 보정 문구 |
+| Codex | `skills/writing-style-doc`를 `~/.agents/skills/`에 복사, 저장소 `AGENTS.md`에 문구 추가 |
+| Grok | 맞춤 지침 또는 워크스페이스 지침에 `STYLE.md` + 보정 문구 |
+
+자세한 절차는 `platforms/` 아래 각 파일에 있습니다.
 
 ## 담고 있는 기준
 
@@ -16,38 +34,22 @@
 - **사실과 경험의 경계**: 제공하지 않은 구매·테스트·측정·만족·비용을 지어내지 않습니다. 확인하지 못한 내용은 본문과 분리한 '작성 메모'에 적습니다. 이 규칙이 문체보다 우선합니다.
 - **글 종류별 구성**: 제품 사용기, 기술 안내·설정 기록, 기술 분석·기고, 업데이트·소식
 - **피할 표현**: "오늘은 ~에 대해 알아보겠습니다", 근거 없는 "혁신적인/완벽한", "~것으로 보입니다" 연속, "A가 아니라 B" 반복, 격언식 결론
-- **문서 서식**: 색상 배지·1셀 콜아웃·영문 마케팅톤 표지·AI 도구명 없이 단색 헤더·표준 표·서명란 위주의 사내 표준 서식
+- **공통 AI 문체 점검**: 응대·맺음 문구, 끝 요약 단락, 이모지, 굵은 글씨 남발, 영어식 줄표, 번역투
+- **문서 서식**: 색상 배지·1셀 콜아웃·영문 마케팅톤 표지 없이 단색 헤더·표준 표 위주
 - **다듬기 흐름**: 원문 보존 → 목적별 방식 선택(자연스럽게 다듬기 / AI 티 줄이기 / 짧고 직접적으로 재작성) → 비교 → 채택 → 의미 왜곡 확인
 
-일반 질문과 코드 작업에는 적용하지 않습니다.
+일반 질문과 코드 작업(코드 주석, 커밋 메시지 포함)에는 적용하지 않습니다.
 
-## 사용 방법
+## 플랫폼별 보정
 
-### Claude 앱
+같은 지침을 넣어도 모델마다 자주 어긋나는 지점이 다릅니다. 각 `platforms/` 파일에 그 부분만 따로 묶은 보정 문구를 두었습니다.
 
-1. 저장소를 내려받거나 `skills/writing-style-doc` 폴더를 zip으로 묶습니다.
-2. Claude 설정의 스킬 메뉴에서 업로드합니다.
-3. 글쓰기 요청을 하면 스킬 설명(description)에 맞는 경우 자동으로 적용됩니다.
-
-### Claude Code
-
-개인 전역 스킬로 쓰려면 다음처럼 복사합니다.
-
-```bash
-git clone https://github.com/yjj3019/writing-style-doc.git
-mkdir -p ~/.claude/skills
-cp -r writing-style-doc/skills/writing-style-doc ~/.claude/skills/
-```
-
-특정 프로젝트에만 쓰려면 해당 프로젝트의 `.claude/skills/` 아래에 복사합니다.
-
-### 다른 AI
-
-`prompts/writing-style-doc-prompt.md`의 구분선(`---`) 아래 내용을 통째로 복사해 다음 위치에 붙여 넣습니다.
-
-- ChatGPT: 맞춤형 지침, 또는 프로젝트·GPT 지침
-- Gemini: Gem 지침
-- 그 밖의 AI: 시스템 프롬프트나 사용자 지침 칸
+| 대상 | 보정하는 부분 |
+|---|---|
+| Claude | 소제목·목록 과다, 완곡 표현 연속, 분량 늘어남 |
+| ChatGPT | 끝의 추가 제안 문장, 이모지 소제목, 줄표·콜론 연결, 기계적 글머리표 |
+| Codex | 문서 파일에만 적용, 주석·커밋은 저장소 관례, 실행하지 않은 결과 금지 |
+| Grok | 요청 없는 농담·개성 톤, X 게시물·실시간 검색 결과의 교차 확인 |
 
 ## 다른 스킬과의 관계
 
@@ -56,4 +58,9 @@ cp -r writing-style-doc/skills/writing-style-doc ~/.claude/skills/
 
 ## 수정할 때
 
-스킬과 공유용 프롬프트는 같은 기준을 담고 있습니다. 한쪽을 고치면 다른 쪽도 함께 맞춰 주세요.
+`STYLE.md`가 기준입니다. 내용을 바꾸면 아래 파일도 함께 맞춥니다.
+
+- `skills/writing-style-doc/SKILL.md`
+- `platforms/chatgpt.md`의 짧은 버전
+
+플랫폼의 메뉴 위치와 글자 제한은 자주 바뀝니다. 각 플랫폼 파일의 안내는 작성 시점 기준입니다.
