@@ -33,6 +33,7 @@ def render(root):
         + corrections
         + "\n\n## 문체 예시\n\n문체가 모호할 때 [익명화한 편집 예시](references/examples.md)를 읽는다. 예시는 가상이며 사용자 경험으로 재사용하지 않는다.\n"
         + "\n## 참고 지침\n\n독자·목적, 링크·예시 설명, 표현 점검의 적용 범위가 필요하면 [외부 지침 반영 기준](references/editorial-principles.md)을 읽는다. 외부 규칙보다 사용자의 요청과 사실 보존을 우선한다.\n"
+        + "\n문서 구성이나 표현 수정 여부가 모호하면 [편집 점검 기준](references/editing-checklist.md)을 읽는다. 추가 참고 저장소의 고정 커밋과 채택·제외 이유는 [참고 근거](references/sources.md)에 있다. 기본 작업에는 전체 참고 문서를 반복해서 읽을 필요가 없다.\n"
     )
 
 
