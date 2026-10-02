@@ -27,5 +27,8 @@
       "evidence": "ChatGPT 장애 분석 보고서라는 제목은 ChatGPT 서비스 장애로 읽힐 수 있어 분석 주제와 미지정 장애 대상 구분이 부족함"
     }
   },
-  "overall": "fail"
+  "overall": "fail",
+  "schema_version": 2,
+  "guidance_sha256": "3caf7b5e8d21f916b367139598b9875768a4ad1ee947d77d30bdc472fee0a06a",
+  "style_sample_ids": []
 }

@@ -110,7 +110,7 @@ python3 scripts/package_skill.py
 
 ## 검증·버전·배포
 
-`VERSION`은 최초 명시 버전인 1.0.0부터 관리합니다. 행동 규칙의 변경은 minor, 의미를 바꾸지 않는 수정은 patch, 호환되지 않는 적용 방식 변경은 major를 올립니다. 버전을 바꾼 뒤 스킬을 다시 생성합니다.
+`VERSION`은 최초 명시 버전 1.0.0부터 관리하며 현재는 1.0.1입니다. 행동 규칙의 변경은 minor, 의미를 바꾸지 않는 수정은 patch, 호환되지 않는 적용 방식 변경은 major를 올립니다. 버전을 바꾼 뒤 스킬을 다시 생성합니다.
 
 - `scripts/validate_repo.py`: 동기화·메타데이터·참조 파일·평가 JSON 형식·Python 3.8 문법 검사. 외부 URL 접속과 모델 출력의 의미 평가는 별도입니다.
 - `tests/`: 링크·평가 기록의 잘못된 입력 거부, 배포 ZIP의 내용·무결성·재현성 확인.
@@ -119,3 +119,22 @@ python3 scripts/package_skill.py
 - 원격 릴리스·태그는 이번 변경에서 자동 게시하지 않습니다. Actions 아티팩트는 GitHub Releases와 별개입니다. 이미 설치한 스킬은 자동 갱신되지 않습니다.
 
 [평가 사례](evaluation/cases.md)와 `evaluation/record-template.json`으로 정확한 입력·출력과 네 평가 축을 기록합니다. 이전 기록의 미기록 모델·원문을 추정해 채우지 않습니다.
+
+## 검사 범위와 평가 근거
+
+- 저장소의 일반 Markdown 인라인·참조 링크, 같은 파일·다른 Markdown 파일의 제목 앵커와 HTML `<a name/id>`를 확인합니다. 코드 블록·인라인 코드·주석은 링크 검사에서 제외합니다. 외부 URL의 응답, 전체 CommonMark·HTML 구문의 완전한 해석은 보장하지 않습니다.
+- 설치 ZIP은 `SKILL.md`와 `references/` 바로 아래 Markdown 파일을 포함합니다. 각 파일의 로컬 링크가 이 허용 목록 안에서 해결되는지 검사합니다. 저장소에만 있는 자료나 하위 디렉터리의 미포함 파일을 참조하면 실패합니다. 패키지 폴더와 파일의 심볼릭 링크도 거부합니다.
+- CI는 Python 3.8·3.11·3.13에서 실제 실행합니다. 문법 검사와 실행 검증을 구분하며 이 조합 외의 버전·OS를 실행했다고 표시하지 않습니다. ZIP 재현성 검사는 같은 실행 환경에서 반복 생성한 결과의 비교입니다.
+- 평가 JSON은 schema_version 2를 사용합니다. 실제 적용 지침의 SHA256과 개인 문체 자료 식별자를 기록합니다. 실제 자료 없이 개인 문체를 통과·실패로 판정할 수 없습니다. 등록한 자료의 진위와 판정 근거의 타당성은 사람이 확인합니다.
+- `python3 scripts/validate_repo.py --verify-history`는 커밋의 실제 지침 바이트·VERSION을 평가 기록과 대조합니다. 전체 Git 이력이 필요합니다. 기본 검사는 구조만 확인하며 역사적 지침을 검증했다고 표시하지 않습니다.
+
+```bash
+python3 scripts/guidance_hash.py --commit HEAD --variant skill
+python3 scripts/guidance_hash.py --commit HEAD --variant full
+python3 scripts/guidance_hash.py --commit HEAD --variant short
+python3 scripts/validate_repo.py --verify-history
+```
+
+전체본의 해시는 `STYLE.md` 구분선 아래를 앞뒤 공백 제거한 UTF-8 바이트, 축약본은 `platforms/chatgpt.md`의 짧은 버전 text 블록의 UTF-8 바이트, 스킬은 `SKILL.md` 파일 전체 바이트를 기준으로 합니다. 설치 ZIP의 파일 해시는 실제 파일 전체 바이트이므로 전체본·축약본 적용 지침 해시와 구분합니다.
+
+기존 3개 JSON 기록은 실제 해당 커밋의 스킬 바이트를 읽어 해시를 보충했습니다. 미기록 모델이나 생성 설정은 추정하지 않았습니다. 새로운 평가 템플릿은 새 버전에 맞추고, 과거 기록의 버전은 당시 버전을 유지합니다.
