@@ -120,6 +120,8 @@ python3 scripts/package_skill.py
 
 [평가 사례](evaluation/cases.md)와 `evaluation/record-template.json`으로 정확한 입력·출력과 네 평가 축을 기록합니다. 이전 기록의 미기록 모델·원문을 추정해 채우지 않습니다.
 
+[1.0.1 전체·짧은 지침 관찰](evaluation/result-v101-20261002.md)에는 표·조건 보존을 비교한 네 출력과 평가 한계를 기록했습니다.
+
 ## 검사 범위와 평가 근거
 
 - 저장소의 일반 Markdown 인라인·참조 링크, 같은 파일·다른 Markdown 파일의 제목 앵커와 HTML `<a name/id>`를 확인합니다. 코드 블록·인라인 코드·주석은 링크 검사에서 제외합니다. 외부 URL의 응답, 전체 CommonMark·HTML 구문의 완전한 해석은 보장하지 않습니다.
