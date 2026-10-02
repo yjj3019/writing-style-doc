@@ -1,3 +1,6 @@
 __pycache__/
 *.pyc
 writing-style-doc.zip
+
+dist/
+__pycache__/

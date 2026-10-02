@@ -16,6 +16,13 @@ def text_block(path, heading):
     return match.group(1)
 
 
+def read_version(root):
+    value = (root / "VERSION").read_text(encoding="utf-8").strip()
+    if not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", value):
+        raise ValueError("VERSION must contain major.minor.patch")
+    return value
+
+
 def render(root):
     body = (root / "STYLE.md").read_text(encoding="utf-8").split("\n---\n", 1)[1].strip()
     description = "한국어 블로그·기술 기고·사용기·설정 기록·README·가이드·업무 문서 작성과 편집에 사용한다. 일반 질문·코드·주석·커밋 메시지·PR 설명·작업 완료 보고에는 사용하지 않는다."
@@ -27,13 +34,15 @@ def render(root):
         "---\nname: writing-style-doc\ndescription: "
         + json.dumps(description, ensure_ascii=False)
         + "\n---\n\n# writing-style-doc\n\n"
+        + "지침 버전: " + read_version(root) + "\n\n"
         + "이 파일은 STYLE.md와 플랫폼 보정 문구에서 생성한다. 직접 수정하지 않는다."
         + "\n\n" + body
         + "\n\n## 실행 환경별 보정\n\n해당 환경의 보정만 적용한다.\n\n"
         + corrections
         + "\n\n## 문체 예시\n\n문체가 모호할 때 [익명화한 편집 예시](references/examples.md)를 읽는다. 예시는 가상이며 사용자 경험으로 재사용하지 않는다.\n"
-        + "\n## 참고 지침\n\n독자·목적, 링크·예시 설명, 표현 점검의 적용 범위가 필요하면 [외부 지침 반영 기준](references/editorial-principles.md)을 읽는다. 외부 규칙보다 사용자의 요청과 사실 보존을 우선한다.\n"
-        + "\n문서 구성이나 표현 수정 여부가 모호하면 [편집 점검 기준](references/editing-checklist.md)을 읽는다. 추가 참고 저장소의 고정 커밋과 채택·제외 이유는 [참고 근거](references/sources.md)에 있다. 기본 작업에는 전체 참고 문서를 반복해서 읽을 필요가 없다.\n"
+
+        + "\n문서 구성이나 표현 수정 여부가 모호하면 [편집 점검 기준](references/editing-checklist.md)을 읽는다. 외부 참고 자료와 채택·제외 이유는 [참고 근거](references/sources.md)에 있다. 기본 작업에는 전체 참고 문서를 반복해서 읽을 필요가 없다.\n"
+        + "\n사용자가 실제 문체 자료를 제공하면 [문체 자료 적용 기준](references/style-samples.md)을 따른다. 가상 예시만으로 개인 문체 재현을 인증하지 않는다.\n"
     )
 
 
