@@ -19,7 +19,11 @@ Claude, ChatGPT(Codex 포함), Grok에서 쓸 수 있게 구성했습니다. 기
 | `skills/writing-style-doc/references/sources.md` | 외부 참고 자료·파일 식별자·라이선스와 반영 범위 |
 | `evaluation/cases.md` | 경험·추정·익명화·적용 범위를 확인하는 수동 평가 입력 |
 | `scripts/sync_style.py` | 전체본·보정에서 스킬 생성, 동기화와 짧은 버전 길이 검사 |
-| `scripts/package_skill.py` | 동기화 확인 후 설치용 ZIP 생성 |
+| `scripts/package_skill.py` | 검사 후 버전 ZIP·파일 해시·배포 명세 생성 |
+| `scripts/validate_repo.py` | 문서·메타데이터·평가 기록의 구조 검사 |
+| `skills/writing-style-doc/references/style-samples.md` | 실제 사용자 문체 자료 적용 기준 |
+| `evaluation/style-samples.md`, `evaluation/record-template.json` | 실제 자료 등록과 평가 기록 형식 |
+| `VERSION`, `.github/workflows/validate.yml`, `tests/` | 버전·자동 검사·회귀 검증 |
 
 ## 빠른 시작
 
