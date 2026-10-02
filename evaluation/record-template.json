@@ -1,7 +1,7 @@
 {
   "date": "YYYY-MM-DD",
   "guidance_commit": "<지침 커밋 SHA>",
-  "guidance_version": "1.0.0",
+  "guidance_version": "1.0.1",
   "variant": "skill",
   "platform": "<플랫폼>",
   "model": null,
@@ -10,10 +10,25 @@
   "input": "<정확한 익명화 입력>",
   "output": "<정확한 출력>",
   "checks": {
-    "facts": {"verdict": "unassessed", "evidence": ""},
-    "request": {"verdict": "unassessed", "evidence": ""},
-    "style": {"verdict": "unassessed", "evidence": "실제 문체 자료 없음"},
-    "readability": {"verdict": "unassessed", "evidence": ""}
+    "facts": {
+      "verdict": "unassessed",
+      "evidence": ""
+    },
+    "request": {
+      "verdict": "unassessed",
+      "evidence": ""
+    },
+    "style": {
+      "verdict": "unassessed",
+      "evidence": "실제 문체 자료 없음"
+    },
+    "readability": {
+      "verdict": "unassessed",
+      "evidence": ""
+    }
   },
-  "overall": "unassessed"
+  "overall": "unassessed",
+  "schema_version": 2,
+  "guidance_sha256": "<실제로 적용한 지침 바이트의 SHA256>",
+  "style_sample_ids": []
 }

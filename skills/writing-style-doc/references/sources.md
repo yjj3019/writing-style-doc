@@ -39,3 +39,7 @@ blob SHA는 확인한 파일 내용의 식별자이며 커밋 SHA가 아니다. 
 
 
 초기 자료는 원칙을 재서술했으며 원문·규칙 파일을 복사하지 않았다. 영어 수동태·대소문자·80자 줄바꿈을 한국어 기준으로 적용하지 않는다.
+
+## 링크 검사 구현 근거
+
+제목 앵커·중복 제목·사용자 지정 앵커 규칙은 [GitHub 공식 Markdown 안내](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#section-links)를 2026-10-02에 확인했습니다. 코드 구현은 별도로 작성했으며 일반 표기 범위만 검사합니다. 전체 Markdown 렌더러를 대체하지 않습니다.

@@ -27,5 +27,8 @@
       "evidence": "자연스러운 띄어쓰기이며 원래 어조 유지"
     }
   },
-  "overall": "unassessed"
+  "overall": "unassessed",
+  "schema_version": 2,
+  "guidance_sha256": "3caf7b5e8d21f916b367139598b9875768a4ad1ee947d77d30bdc472fee0a06a",
+  "style_sample_ids": []
 }
