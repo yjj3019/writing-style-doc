@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-02",
+  "guidance_commit": "31e87dd31e41c5b37e750ba6e9ff78442963e161",
+  "guidance_version": "1.0.0",
+  "variant": "skill",
+  "platform": "Codex independent agent",
+  "model": null,
+  "settings": null,
+  "unknown_reason": "독립 에이전트 호출 결과에 정확한 모델 식별자·생성 설정이 노출되지 않음",
+  "input": "띄어쓰기만 고쳐줘: 오늘은설정 A를 확인했네요. 결과는아직 몰라요.",
+  "output": "오늘은 설정 A를 확인했네요. 결과는 아직 몰라요.",
+  "checks": {
+    "facts": {
+      "verdict": "pass",
+      "evidence": "사실·A·원인 미확인 표현과 종결이 보존됨"
+    },
+    "request": {
+      "verdict": "pass",
+      "evidence": "두 곳의 띄어쓰기만 수정, 제목·추가 문장 없음"
+    },
+    "style": {
+      "verdict": "unassessed",
+      "evidence": "실제 사용자 문체 평가 자료 없음"
+    },
+    "readability": {
+      "verdict": "pass",
+      "evidence": "자연스러운 띄어쓰기이며 원래 어조 유지"
+    }
+  },
+  "overall": "unassessed"
+}
