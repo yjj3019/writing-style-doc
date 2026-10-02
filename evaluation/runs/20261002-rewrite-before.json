@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-02",
+  "guidance_commit": "31e87dd31e41c5b37e750ba6e9ff78442963e161",
+  "guidance_version": "1.0.0",
+  "variant": "skill",
+  "platform": "Codex independent agent",
+  "model": null,
+  "settings": null,
+  "unknown_reason": "독립 에이전트 호출 결과에 정확한 모델 식별자·생성 설정이 노출되지 않음",
+  "input": "아래 가상 기록을 결론부터 나오도록 짧은 장애 보고서로 재작성하고 마지막에 3줄 요약을 넣어줘. 기록: 운영팀은 10:00에 설정 X를 변경했다. 10:05에 서비스가 종료됐다. 종료 원인과 주체는 미확인이다. 오류 코드 E123은 30초 간격으로 기록됐다. 호스트명은 내부서버A라 공개용으로 익명화해줘. 제품명 ChatGPT는 분석 주제이므로 유지해줘.",
+  "output": "ChatGPT 장애 분석 보고서\n\n10:05에 서비스가 종료됐습니다. 종료 원인과 주체는 미확인이며, 설정 X 변경과의 인과관계도 확인되지 않았습니다.\n\n운영팀은 10:00에 설정 X를 변경했습니다. 호스트 `node-a`에서는 오류 코드 E123이 30초 간격으로 기록됐습니다. 호스트명은 공개용으로 익명화했습니다.\n\n3줄 요약  \n10:00 운영팀이 설정 X를 변경했고, 10:05 서비스가 종료됐습니다.  \n종료 원인과 주체, 설정 변경과의 인과관계는 미확인입니다.  \n익명화한 호스트 `node-a`에서 E123이 30초 간격으로 기록됐습니다.",
+  "checks": {
+    "facts": {
+      "verdict": "unassessed",
+      "evidence": "시각·간격·오류 코드·미확인은 유지됐으나 제목의 ChatGPT와 장애 대상 관계가 모호해 완전 통과로 인증하지 않음"
+    },
+    "request": {
+      "verdict": "pass",
+      "evidence": "결과 우선, 익명화, 제품명 유지, 마지막 3줄 요약 수행"
+    },
+    "style": {
+      "verdict": "unassessed",
+      "evidence": "실제 사용자 문체 평가 자료 없음"
+    },
+    "readability": {
+      "verdict": "fail",
+      "evidence": "ChatGPT 장애 분석 보고서라는 제목은 ChatGPT 서비스 장애로 읽힐 수 있어 분석 주제와 미지정 장애 대상 구분이 부족함"
+    }
+  },
+  "overall": "fail"
+}

@@ -1,0 +1,19 @@
+{
+  "date": "YYYY-MM-DD",
+  "guidance_commit": "<지침 커밋 SHA>",
+  "guidance_version": "1.0.0",
+  "variant": "skill",
+  "platform": "<플랫폼>",
+  "model": null,
+  "settings": null,
+  "unknown_reason": "모델·설정이 노출되지 않으면 사유 기록",
+  "input": "<정확한 익명화 입력>",
+  "output": "<정확한 출력>",
+  "checks": {
+    "facts": {"verdict": "unassessed", "evidence": ""},
+    "request": {"verdict": "unassessed", "evidence": ""},
+    "style": {"verdict": "unassessed", "evidence": "실제 문체 자료 없음"},
+    "readability": {"verdict": "unassessed", "evidence": ""}
+  },
+  "overall": "unassessed"
+}

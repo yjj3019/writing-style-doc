@@ -15,12 +15,15 @@ Claude, ChatGPT(Codex 포함), Grok에서 쓸 수 있게 구성했습니다. 기
 | `platforms/codex.md` | Codex 스킬 설치 방법, `AGENTS.md`에 넣을 문구 |
 | `platforms/grok.md` | Grok 맞춤 지침·워크스페이스 적용 방법, 보정 문구 |
 | `skills/writing-style-doc/references/examples.md` | 규칙 설명용 가상 편집 예시. 실제 사용자 문체 자료는 아님 |
-| `skills/writing-style-doc/references/editorial-principles.md` | 공개 Git 자료의 출처·반영 원칙과 한국어 적용 범위 |
 | `skills/writing-style-doc/references/editing-checklist.md` | 문서 목적, 보존 대상, 문체 점검의 오탐 처리 |
-| `skills/writing-style-doc/references/sources.md` | 추가 참고 저장소·고정 커밋·라이선스와 반영 범위 |
+| `skills/writing-style-doc/references/sources.md` | 외부 참고 자료·파일 식별자·라이선스와 반영 범위 |
 | `evaluation/cases.md` | 경험·추정·익명화·적용 범위를 확인하는 수동 평가 입력 |
 | `scripts/sync_style.py` | 전체본·보정에서 스킬 생성, 동기화와 짧은 버전 길이 검사 |
-| `scripts/package_skill.py` | 동기화 확인 후 설치용 ZIP 생성 |
+| `scripts/package_skill.py` | 검사 후 버전 ZIP·파일 해시·배포 명세 생성 |
+| `scripts/validate_repo.py` | 문서·메타데이터·평가 기록의 구조 검사 |
+| `skills/writing-style-doc/references/style-samples.md` | 실제 사용자 문체 자료 적용 기준 |
+| `evaluation/style-samples.md`, `evaluation/record-template.json` | 실제 자료 등록과 평가 기록 형식 |
+| `VERSION`, `.github/workflows/validate.yml`, `tests/` | 버전·자동 검사·회귀 검증 |
 
 ## 빠른 시작
 
@@ -68,7 +71,7 @@ Humanizer, Diátaxis, Vale, write-good의 원문에서도 문서 목적별 구�
 
 ## 다른 스킬과의 관계
 
-Google 문서 가이드, Developer Style Guide, Vale write-good에서 독자·목적, 링크·예시 설명, 문서 갱신과 편집 검토 원칙을 참고했습니다. 출처와 적용하지 않은 영어 규칙은 [외부 지침 반영 기준](skills/writing-style-doc/references/editorial-principles.md)에 기록했습니다. 영어 검사기를 설치하거나 개인 문체를 외부 표준으로 대체하지 않았습니다.
+Google 문서 가이드, Developer Style Guide, Vale write-good에서 독자·목적, 링크·예시 설명, 문서 갱신과 편집 검토 원칙을 참고했습니다. 출처와 적용하지 않은 영어 규칙은 [참고 근거](skills/writing-style-doc/references/sources.md)에 기록했습니다. 영어 검사기를 설치하거나 개인 문체를 외부 표준으로 대체하지 않았습니다.
 
 - 특정 매체의 게시 규격이 명시되면 그 규격이 우선하고, 이 스킬은 문장 톤 보정만 맡습니다.
 - 적용 범위가 겹치는 다른 문체 스킬과 함께 켜 두면 어느 쪽이 적용될지 일정하지 않습니다. 하나만 활성화하는 편이 낫습니다.
@@ -83,7 +86,9 @@ Google 문서 가이드, Developer Style Guide, Vale write-good에서 독자·�
 ```bash
 python3 scripts/sync_style.py
 python3 scripts/sync_style.py --check
-python3 scripts/package_skill.py --output writing-style-doc.zip
+python3 scripts/validate_repo.py
+python3 -m unittest discover -s tests
+python3 scripts/package_skill.py
 ```
 
 생성된 스킬과 참조 예시는 함께 배포합니다. 저장소를 수정해도 이미 업로드하거나 복사한 스킬은 자동 갱신되지 않으므로 다시 설치합니다.
@@ -91,3 +96,26 @@ python3 scripts/package_skill.py --output writing-style-doc.zip
 검사는 스킬 내용의 동기화, 짧은 버전의 1,500자 제한과 ZIP 구조를 확인하는 절차입니다. 모델 출력의 정확성과 개인 문체 재현을 인증하지 않습니다. 플랫폼별 적용 결과는 `evaluation/cases.md`로 별도 확인합니다.
 
 플랫폼의 메뉴 위치와 글자 제한은 자주 바뀝니다. 각 플랫폼 파일에 확인일과 근거 또는 미확인 범위를 남깁니다. 현재 공식 안내 확인일은 2026-10-02이며 Grok의 세부 설정 동작은 미확인입니다.
+
+## 편집 강도
+
+| 요청 | 허용 범위 |
+|---|---|
+| 교정 | 맞춤법·띄어쓰기·문장부호. "띄어쓰기만"처럼 좁은 요청 우선 |
+| 다듬기·조금 다듬기·미지정 | 어색한 문장·연결의 최소 수정. 문체·구조 유지 |
+| 재작성 | 요청한 범위에서 문장·구성 변경. 사실·조건·확실성 보존 |
+| 검토만 | 의견만 제공 |
+
+신규 작성과 요약은 사용자가 요청한 범위를 따릅니다. 실제 문체 자료가 없으면 가상 예시로 개인 문체 재현을 인증하지 않습니다. 자료 등록은 [문체 자료 등록](evaluation/style-samples.md)을 참고합니다.
+
+## 검증·버전·배포
+
+`VERSION`은 최초 명시 버전인 1.0.0부터 관리합니다. 행동 규칙의 변경은 minor, 의미를 바꾸지 않는 수정은 patch, 호환되지 않는 적용 방식 변경은 major를 올립니다. 버전을 바꾼 뒤 스킬을 다시 생성합니다.
+
+- `scripts/validate_repo.py`: 동기화·메타데이터·참조 파일·평가 JSON 형식·Python 3.8 문법 검사. 외부 URL 접속과 모델 출력의 의미 평가는 별도입니다.
+- `tests/`: 링크·평가 기록의 잘못된 입력 거부, 배포 ZIP의 내용·무결성·재현성 확인.
+- `.github/workflows/validate.yml`: PR·main push·수동 실행에서 검사 후 버전 ZIP·배포 명세·SHA256 파일을 Actions 아티팩트로 제공합니다. 최초 실행 성공 전에는 CI 통과로 간주하지 않습니다.
+- ZIP 기본 위치: `dist/writing-style-doc-<버전>.zip`. 생성 스킬에 버전이 표시되며 옆의 manifest에는 소스 커밋과 파일 해시가 기록됩니다. 같은 버전이라도 소스가 다를 수 있으므로 커밋·해시를 함께 확인합니다.
+- 원격 릴리스·태그는 이번 변경에서 자동 게시하지 않습니다. Actions 아티팩트는 GitHub Releases와 별개입니다. 이미 설치한 스킬은 자동 갱신되지 않습니다.
+
+[평가 사례](evaluation/cases.md)와 `evaluation/record-template.json`으로 정확한 입력·출력과 네 평가 축을 기록합니다. 이전 기록의 미기록 모델·원문을 추정해 채우지 않습니다.
